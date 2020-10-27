@@ -1,5 +1,5 @@
 <template>
-  <h1>噢吼 Emoji</h1>
+  <h1>🥳噢吼 Emoji🥳</h1>
   <div>
     <textarea
       v-model="state.fromStr"
