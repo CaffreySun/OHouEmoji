@@ -22,8 +22,9 @@ jobs:
      
     # react项目的FOLDER为build，vue项目改为dist   
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
         FOLDER: ohou_emoji/dist
+        CLEAN: true
