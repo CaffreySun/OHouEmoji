@@ -1,8 +1,8 @@
-name: CI
+name: DeployGH
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   main:
