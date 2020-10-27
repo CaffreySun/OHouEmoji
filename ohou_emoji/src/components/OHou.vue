@@ -49,36 +49,38 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-import { Codebook } from "./Codebook.js";
+import { reactive } from "vue"
+import { Codebook } from "./Codebook.js"
 
 export default {
   setup() {
+    // 按钮文本
     const btnText = {
-      encryptText: "> 加密 >",
+      encryptText:      "> 加密 >",
       encryptHoverText: "> > > >",
-      decryptText: "< 解密 <",
+      decryptText:      "< 解密 <",
       decryptHoverText: "< < < <",
-    };
+    }
+    
     const state = reactive({
       encryptBtnText: btnText.encryptText,
       decryptBtnText: btnText.decryptText,
       leftContent: "",
       rightContent: "",
       foot: "🥳😇🙃😄😱😩🤯🤫😜🙂😎😷😣😍😖😅😢😆😕😊🤬😥😷🙁😄😟🙂😞😰😋😗😨🥰😎😝🤪🤫🤣🤫😞😤🤗🙂😦😶🥳",
-    });
+    })
 
-    const { encrypt, decrypt } = Codebook();
+    const { encrypt, decrypt } = Codebook()
 
     //解密方法
     function decryptText() {
-      state.leftContent = decrypt(state.rightContent);
+      state.leftContent = decrypt(state.rightContent)
     }
 
     //加密方法
     function encryptText() {
-      if (state.leftContent.length == 0) return;
-      state.rightContent = encrypt(state.leftContent);
+      if (state.leftContent.length == 0) return
+      state.rightContent = encrypt(state.leftContent)
     }
 
     return {
@@ -86,9 +88,9 @@ export default {
       state,
       encryptText,
       decryptText,
-    };
+    }
   },
-};
+}
 </script>
 
 <style>
@@ -151,6 +153,7 @@ export default {
 }
 
 .btn {
+  user-select:none;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,154 +1,40 @@
 import CryptoJS from "crypto-js"
+import { SmileysCodebook } from "./codebooks/SmileysCodebook.js"
+// import { HandInHandCodebook } from "./codebooks/HandInHandCodebook.js"
 
 export function Codebook() {
-  const smileysTag = "🥳"
-  const smileysEncryptCodebook = {
-    a: "😀",
-    b: "😃",
-    c: "😄",
-    d: "😁",
-    e: "😆",
-    f: "😅",
-    g: "😂",
-    h: "🤣",
-    i: "😯",
-    j: "😊",
-    k: "😇",
-    l: "🙂",
-    m: "🙃",
-    n: "😉",
-    o: "😌",
-    p: "😍",
-    q: "🥰",
-    r: "😘",
-    s: "😗",
-    t: "😙",
-    u: "😚",
-    v: "😋",
-    w: "😛",
-    x: "😝",
-    y: "😜",
-    z: "🤪",
-    A: "🧐",
-    B: "🤓",
-    C: "😎",
-    D: "🤩",
-    E: "🤒",
-    F: "😏",
-    G: "😒",
-    H: "😞",
-    I: "😔",
-    J: "😟",
-    K: "😕",
-    L: "🙁",
-    M: "😦",
-    N: "😣",
-    O: "😖",
-    P: "😫",
-    Q: "😩",
-    R: "🥺",
-    S: "😢",
-    T: "😭",
-    U: "😤",
-    V: "😠",
-    W: "😡",
-    X: "🤬",
-    Y: "🤯",
-    Z: "😳",
-    1: "🥵",
-    2: "😷",
-    3: "😱",
-    4: "😨",
-    5: "😰",
-    6: "😥",
-    7: "😓",
-    8: "🤗",
-    9: "🤔",
-    0: "🤭",
-    "/": "🤫",
-    "+": "🤥",
-    "=": "😶",
-  }
-  const smileysDecryptCodebook = {
-    "😀": "a",
-    "😃": "b",
-    "😄": "c",
-    "😁": "d",
-    "😆": "e",
-    "😅": "f",
-    "😂": "g",
-    "🤣": "h",
-    "😯": "i",
-    "😊": "j",
-    "😇": "k",
-    "🙂": "l",
-    "🙃": "m",
-    "😉": "n",
-    "😌": "o",
-    "😍": "p",
-    "🥰": "q",
-    "😘": "r",
-    "😗": "s",
-    "😙": "t",
-    "😚": "u",
-    "😋": "v",
-    "😛": "w",
-    "😝": "x",
-    "😜": "y",
-    "🤪": "z",
-    "🧐": "A",
-    "🤓": "B",
-    "😎": "C",
-    "🤩": "D",
-    "🤒": "E",
-    "😏": "F",
-    "😒": "G",
-    "😞": "H",
-    "😔": "I",
-    "😟": "J",
-    "😕": "K",
-    "🙁": "L",
-    "😦": "M",
-    "😣": "N",
-    "😖": "O",
-    "😫": "P",
-    "😩": "Q",
-    "🥺": "R",
-    "😢": "S",
-    "😭": "T",
-    "😤": "U",
-    "😠": "V",
-    "😡": "W",
-    "🤬": "X",
-    "🤯": "Y",
-    "😳": "Z",
-    "🥵": "1",
-    "😷": "2",
-    "😱": "3",
-    "😨": "4",
-    "😰": "5",
-    "😥": "6",
-    "😓": "7",
-    "🤗": "8",
-    "🤔": "9",
-    "🤭": "0",
-    "🤫": "/",
-    "🤥": "+",
-    "😶": "=",
-  }
+  const smileysCodebook = SmileysCodebook()
+  // const handInHandCodebook = HandInHandCodebook()
 
-  function translate(str, codebook, hasTag) {
+  var codebook = smileysCodebook
+
+  function encryptTranslate(str) {
     var newStr = ""
-    var tagCount = 0
     for (const ch of str) {
-      if (hasTag) {
-        if (ch == smileysTag) tagCount++
-        if (tagCount >= 2) break
-      }
-
-      let newChar = codebook[ch]
+      let newChar = codebook.encryptCodebook[ch][Math.floor(Math.random() * codebook.scale)]
 
       if (newChar !== null && newChar != undefined && newChar.length != 0) {
+        newStr += newChar
+      }
+    }
+
+    return newStr
+  }
+
+  function decryptTranslate(str) {
+    var newStr = ""
+    var tagCount = 0
+
+    for (const ch of str) {
+      if (ch == codebook.tag) {
+        tagCount++
+        continue
+      }
+      if (tagCount >= 2) break
+
+      let newChar = codebook.decryptCodebook[ch]
+
+      if (newChar != undefined) {
         newStr += newChar
       }
     }
@@ -159,14 +45,12 @@ export function Codebook() {
   const key = CryptoJS.enc.Utf8.parse("ohouohouohouohou") //十六位十六进制数作为密钥
   const iv = CryptoJS.enc.Utf8.parse("ohou") //十六位十六进制数作为密钥偏移量
 
-  //解密方法
+  // 解密方法
   function decrypt(text) {
-    let transText = translate(
-      text,
-      smileysDecryptCodebook,
-      true
-    )
-    let decrypt = CryptoJS.AES.decrypt(transText, key, {
+    let transText = decryptTranslate(text)
+    let encryptedHexStr = CryptoJS.enc.Hex.parse(transText);
+    let srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+    let decrypt = CryptoJS.AES.decrypt(srcs, key, {
       iv: iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
@@ -185,10 +69,11 @@ export function Codebook() {
       padding: CryptoJS.pad.Pkcs7,
     })
 
-    let cntStr = encrypted.ciphertext.toString(CryptoJS.enc.Base64)
-    let ohouEmoji = translate(cntStr,smileysEncryptCodebook, false)
+    let cntStr = encrypted.ciphertext.toString().toUpperCase()
+    console.log(cntStr)
+    let ohouEmoji = encryptTranslate(cntStr)
 
-    return smileysTag + ohouEmoji + smileysTag
+    return codebook.tag + ohouEmoji + codebook.tag
   }
 
   return {
