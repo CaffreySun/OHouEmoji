@@ -3,7 +3,7 @@
     <h1>🥳噢吼 Emoji🥳</h1>
     <div class="content">
       <!-- 左边输入框 -->
-      <div class="content_item left_input">
+      <div class="content_item input_box">
         <textarea
           class="text_input"
           v-model="state.leftContent"
@@ -52,7 +52,7 @@
       </div>
 
       <!-- 右边输入框 -->
-      <div class="content_item right_input">
+      <div class="content_item input_box">
         <textarea
           class="text_input"
           v-model="state.rightContent"
@@ -147,7 +147,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 
 @media all and (max-width: 500px) {
@@ -176,20 +176,19 @@ export default {
     justify-content: space-between;
     align-items: center;
   }
+
+  .content > div {
+    height: 100%;
+  }
 }
 
 .content_item {
   flex-grow: 2;
 }
 
-.left_input {
-  height: 100%;
-  width: 100%;
-}
-
-.right_input {
-  height: 100%;
-  width: 100%;
+.input_box {
+  display: flex;
+  justify-content: center;
 }
 
 .text_input {
@@ -197,12 +196,11 @@ export default {
   outline: none;
   box-sizing: border-box;
   font-size: 1.2em;
-  width: 100%;
-  height: 100%;
   padding: 0.5em;
   border: 0.1em solid #999;
   border-radius: 0.5em;
   transition: 0.3s;
+  width: 100%;
 }
 
 .text_input:hover {
@@ -220,6 +218,8 @@ export default {
 @media all and (max-width: 500px) {
   .center_btns {
     flex-grow: 0;
+    width: 100%;
+    height: 8em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,6 +230,8 @@ export default {
 @media all and (min-width: 501px) {
   .center_btns {
     flex-grow: 0;
+    height: 100%;
+    width: 8em;
     display: flex;
     justify-content: center;
     align-items: center;
