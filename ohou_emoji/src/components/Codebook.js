@@ -1,4 +1,4 @@
-import CryptoJS from "crypto-js";
+import CryptoJS from "crypto-js"
 
 export function Codebook() {
   const smileysPrefix = "🥳"
@@ -149,8 +149,9 @@ export function Codebook() {
     return newStr
   }
 
-  const key = CryptoJS.enc.Utf8.parse("ohouohouohouohou"); //十六位十六进制数作为密钥
-  const iv = CryptoJS.enc.Utf8.parse("ohou"); //十六位十六进制数作为密钥偏移量
+  const key = CryptoJS.enc.Utf8.parse("ohouohouohouohou") //十六位十六进制数作为密钥
+  const iv = CryptoJS.enc.Utf8.parse("ohou") //十六位十六进制数作为密钥偏移量
+
   //解密方法
   function decrypt(text) {
     let transText = translate(
@@ -162,26 +163,26 @@ export function Codebook() {
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
     })
-    let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
-    return decryptedStr.toString();
+    let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8)
+    return decryptedStr.toString()
   }
 
   //加密方法
   function encrypt(text) {
-    if (text.length == 0) return null;
-    let transText = CryptoJS.enc.Utf8.parse(text);
+    if (text.length == 0) return null
+    let transText = CryptoJS.enc.Utf8.parse(text)
     let encrypted = CryptoJS.AES.encrypt(transText, key, {
       iv: iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
-    });
-    let pwdStr = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+    })
+    let pwdStr = encrypted.ciphertext.toString(CryptoJS.enc.Base64)
 
-    return smileysPrefix + translate(pwdStr, smileysEncryptCodebook);
+    return smileysPrefix + translate(pwdStr, smileysEncryptCodebook)
   }
 
   return {
     encrypt,
     decrypt
-  };
+  }
 }

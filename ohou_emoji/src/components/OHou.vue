@@ -22,20 +22,20 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-import { Codebook } from "./Codebook.js";
+import { reactive } from "vue"
+import { Codebook } from "./Codebook.js"
 
 export default {
   setup() {
     const state = reactive({
       fromStr: "",
       toStr: "",
-    });
+    })
 
     const {
       encrypt,
       decrypt
-    } = Codebook();
+    } = Codebook()
 
     //解密方法
     function decryptText() {
@@ -44,7 +44,7 @@ export default {
 
     //加密方法
     function encryptText() {
-      if (state.fromStr.length == 0) return;
+      if (state.fromStr.length == 0) return
       state.toStr = encrypt(state.fromStr)
     }
 
@@ -52,9 +52,9 @@ export default {
       state,
       encryptText,
       decryptText,
-    };
+    }
   },
-};
+}
 </script>
 
 <style>
