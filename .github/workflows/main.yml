@@ -16,6 +16,7 @@ jobs:
     # react项目为npm run-script build，vue项目改为npm run build
     - name: Install and Build
       run: |
+        cd ohou_emoji
         npm install
         npm run build
      
