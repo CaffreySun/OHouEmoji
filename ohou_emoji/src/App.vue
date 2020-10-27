@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import OHou from './components/OHou.vue'
+import OHou from "./components/OHou.vue";
 
 export default {
-  name: '噢吼 Emoji',
+  name: "噢吼 Emoji",
   components: {
-    OHou
-  }
-}
+    OHou,
+  },
+};
 </script>
 
 <style>
@@ -19,7 +19,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
 }
 </style>

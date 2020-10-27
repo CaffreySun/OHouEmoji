@@ -1,7 +1,7 @@
 import CryptoJS from "crypto-js"
 
 export function Codebook() {
-  const smileysPrefix = "🥳"
+  const smileysTag = "🥳"
   const smileysEncryptCodebook = {
     a: "😀",
     b: "😃",
@@ -137,10 +137,17 @@ export function Codebook() {
     "😶": "=",
   }
 
-  function translate(str, codebook) {
+  function translate(str, codebook, hasTag) {
     var newStr = ""
+    var tagCount = 0
     for (const ch of str) {
+      if (hasTag) {
+        if (ch == smileysTag) tagCount++
+        if (tagCount >= 2) break
+      }
+
       let newChar = codebook[ch]
+
       if (newChar !== null && newChar != undefined && newChar.length != 0) {
         newStr += newChar
       }
@@ -156,7 +163,8 @@ export function Codebook() {
   function decrypt(text) {
     let transText = translate(
       text,
-      smileysDecryptCodebook
+      smileysDecryptCodebook,
+      true
     )
     let decrypt = CryptoJS.AES.decrypt(transText, key, {
       iv: iv,
@@ -176,9 +184,11 @@ export function Codebook() {
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
     })
-    let pwdStr = encrypted.ciphertext.toString(CryptoJS.enc.Base64)
 
-    return smileysPrefix + translate(pwdStr, smileysEncryptCodebook)
+    let cntStr = encrypted.ciphertext.toString(CryptoJS.enc.Base64)
+    let ohouEmoji = translate(cntStr,smileysEncryptCodebook, false)
+
+    return smileysTag + ohouEmoji + smileysTag
   }
 
   return {
