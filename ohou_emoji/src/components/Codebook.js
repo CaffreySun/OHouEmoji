@@ -1,4 +1,5 @@
 import CryptoJS from "crypto-js"
+import Graphemer from 'graphemer';
 import { SmileysCodebook } from "./codebooks/SmileysCodebook.js"
 // import { HandInHandCodebook } from "./codebooks/HandInHandCodebook.js"
 
@@ -7,13 +8,16 @@ export function Codebook() {
   // const handInHandCodebook = HandInHandCodebook()
 
   var codebook = smileysCodebook
+  // var codebook = handInHandCodebook
 
+  const splitter = new Graphemer();
   function encryptTranslate(str) {
     var newStr = ""
+
     for (const ch of str) {
       let newChar = codebook.encryptCodebook[ch][Math.floor(Math.random() * codebook.scale)]
 
-      if (newChar !== null && newChar != undefined && newChar.length != 0) {
+      if (newChar != undefined) {
         newStr += newChar
       }
     }
@@ -23,16 +27,10 @@ export function Codebook() {
 
   function decryptTranslate(str) {
     var newStr = ""
-    var tagCount = 0
 
-    for (const ch of str) {
-      if (ch == codebook.tag) {
-        tagCount++
-        continue
-      }
-      if (tagCount >= 2) break
-
+    for (const ch of splitter.splitGraphemes(str)) {
       let newChar = codebook.decryptCodebook[ch]
+      console.log(ch + " : " + newChar)
 
       if (newChar != undefined) {
         newStr += newChar
@@ -70,7 +68,6 @@ export function Codebook() {
     })
 
     let cntStr = encrypted.ciphertext.toString().toUpperCase()
-    console.log(cntStr)
     let ohouEmoji = encryptTranslate(cntStr)
 
     return codebook.tag + ohouEmoji + codebook.tag
