@@ -2,15 +2,16 @@
   <OHou />
 </template>
 
-<script>
-import OHou from "./components/OHou.vue";
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import OHou from './components/OHou.vue';
 
-export default {
-  name: "噢吼 Emoji",
+@Options({
   components: {
     OHou,
   },
-};
+})
+export default class App extends Vue {}
 </script>
 
 <style>

@@ -66,7 +66,7 @@
 
 <script>
 import { reactive } from "vue";
-import { Codebook } from "./Codebook.js";
+import { Codebook } from "./Codebook";
 
 export default {
   setup() {
