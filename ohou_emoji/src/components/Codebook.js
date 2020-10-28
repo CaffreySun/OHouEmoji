@@ -30,7 +30,6 @@ export function Codebook() {
 
     for (const ch of splitter.splitGraphemes(str)) {
       let newChar = codebook.decryptCodebook[ch]
-      console.log(ch + " : " + newChar)
 
       if (newChar != undefined) {
         newStr += newChar
