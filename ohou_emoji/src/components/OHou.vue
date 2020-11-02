@@ -64,12 +64,10 @@
         ></textarea>
       </div>
     </div>
-    <h6 style="margin: 1rem 1rem 0rem 1rem">
-      使用本工具进行非法活动，后果自负!
-    </h6>
-    <h6 style="margin: 1rem 1rem 1rem 1rem">
-      🥳😞😃😂😶😝😡😖😇🤩🥱😕🤡🥱😷😎🤑😝😫😑😚😓🧐😡😲😷🤑🤣😁😊😨🙄😰😛😠🤮🤤😃😆😥🤭😖🤭😷😚☺️😗😈😁😢😶🙃🤗😊🤯😜🤮💩😰🤭😉😲😵😱🥴🥳
-    </h6>
+    <div class="foot" style="margin: 0.5rem">
+      ⚠️请注意：本工具的加密密钥公开在代码中，故无法保证您的数据安全，请谨慎使用⚠️<br>
+      ⚠️使用本工具进行非法活动，后果自负⚠️
+    </div>
     <TypeSelect
       v-bind:style="{ display: state.selectingType ? 'block' : 'none' }"
       v-bind:type="state.codebooksType"
@@ -322,5 +320,9 @@ export default defineComponent({
   box-shadow: 0rem 0rem 0.5rem #ffcd00;
   background-color: #ffcd00;
   color: #fff;
+}
+
+.foot {
+  font-size: 0.8rem;
 }
 </style>
