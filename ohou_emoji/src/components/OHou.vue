@@ -1,6 +1,6 @@
 <template>
   <div id="ohou">
-    <h1>🥳噢吼 Emoji🥳</h1>
+    <h1>{{ state.codebooksType }}噢吼 Emoji{{ state.codebooksType }}</h1>
     <div class="content">
       <!-- 左边输入框 -->
       <div class="content_item input_box">
@@ -49,6 +49,10 @@
         >
           {{ state.decryptBtnText }}
         </div>
+
+        <div class="btn" role="button" v-on:click="state.selectingType = true">
+          加密方式
+        </div>
       </div>
 
       <!-- 右边输入框 -->
@@ -61,14 +65,24 @@
       </div>
     </div>
     <h6>{{ state.foot }}</h6>
+    <TypeSelect
+      v-bind:style="{ display: state.selectingType ? 'block' : 'none' }"
+      v-bind:type="state.codebooksType"
+      v-on:update:type="codebooksTypeChanged($event)"
+    />
   </div>
 </template>
 
-<script>
-import { reactive } from "vue";
+<script lang="ts">
+import { reactive, defineComponent } from "vue";
 import { Codebook } from "./Codebook";
+import TypeSelect from "./TypeSelect.vue";
 
-export default {
+export default defineComponent({
+  components: {
+    TypeSelect,
+  },
+
   setup() {
     // 按钮文本
     const btnText = {
@@ -90,14 +104,30 @@ export default {
       leftContent: "",
       rightContent: "",
       foot:
-        "🥳😽🤮👻🤖🤕🎃😈🤐😸😍😘🤮😽🤠🤢🙂😹😊😄🤑🙃🤖😊🤢🤖😸😀😺🙂👽🙃😆💀🤢🙂👾🤧💀🤡😵🥰😽😅🙃👾😉🤧😀🙀😆🤐👾😘😘😺👽😘🥴🙂🤑🥰🤧👿😷🥳",
+        "🥳😞😃😂😶😝😡😖😇🤩🥱😕🤡🥱😷😎🤑😝😫😑😚😓🧐😡😲😷🤑🤣😁😊😨🙄😰😛😠🤮🤤😃😆😥🤭😖🤭😷😚☺️😗😈😁😢😶🙃🤗😊🤯😜🤮💩😰🤭😉😲😵😱🥴🥳",
       isSmallDevice: false,
+      selectingType: false,
+      codebooksType: "🥳",
     });
 
-    const { encrypt, decrypt } = Codebook();
+    const { encrypt, decrypt, changeCodebookType, spotType } = Codebook();
+
+    function codebooksTypeChanged(type: string) {
+      state.selectingType = false;
+
+      if (type == null) return;
+
+      state.codebooksType = type;
+      changeCodebookType(type);
+    }
 
     //解密方法
     function decryptText() {
+      const type = spotType(state.rightContent);
+      if (type != null) {
+        state.codebooksType = type;
+        changeCodebookType(type);
+      }
       state.leftContent = decrypt(state.rightContent);
     }
 
@@ -136,9 +166,10 @@ export default {
       state,
       encryptText,
       decryptText,
+      codebooksTypeChanged,
     };
   },
-};
+});
 </script>
 
 <style>
@@ -153,7 +184,7 @@ export default {
 @media all and (max-width: 500px) {
   .content {
     flex-grow: 1;
-    margin: 1em 1em 0em 1em;
+    margin: 1rem 1rem 0rem 1rem;
     height: 100%;
     width: 90%;
     display: flex;
@@ -162,14 +193,19 @@ export default {
     justify-content: space-between;
     align-items: center;
   }
+
+  .content > div {
+    width: 100%;
+  }
 }
 
 @media all and (min-width: 501px) {
   .content {
     flex-grow: 1;
-    margin: 1em 1em 0em 1em;
+    padding: 1rem 1rem 0rem 1rem;
     height: 100%;
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -195,34 +231,34 @@ export default {
   resize: none;
   outline: none;
   box-sizing: border-box;
-  font-size: 1.2em;
-  padding: 0.5em;
-  border: 0.1em solid #999;
-  border-radius: 0.5em;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border: 0.1rem solid #999;
+  border-radius: 0.5rem;
   transition: 0.3s;
   width: 100%;
 }
 
 .text_input:hover {
-  padding: 0.5em;
-  border: 0.1em solid #ffcd00;
-  box-shadow: 0em 0em 0.1em #ffcd00;
+  padding: 0.5rem;
+  border: 0.1rem solid #ffcd00;
+  box-shadow: 0rem 0rem 0.1rem #ffcd00;
 }
 
 .text_input:focus {
-  padding: 0.4em;
-  border: 0.2em solid #ffcd00;
-  box-shadow: 0em 0em 0.2em #ffcd00;
+  padding: 0.4rem;
+  border: 0.2rem solid #ffcd00;
+  box-shadow: 0rem 0rem 0.2rem #ffcd00;
 }
 
 @media all and (max-width: 500px) {
   .center_btns {
     flex-grow: 0;
-    width: 100%;
-    height: 8em;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: top;
+    width: 100%;
+    height: 4rem;
     flex-direction: row;
   }
 }
@@ -230,27 +266,39 @@ export default {
 @media all and (min-width: 501px) {
   .center_btns {
     flex-grow: 0;
-    height: 100%;
-    width: 8em;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: top;
+    height: 100%;
+    width: 6rem;
     flex-direction: column;
   }
 }
 
 .btn {
+  font-size: 0.8rem;
   user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 0.1em solid #ddd;
-  border-radius: 0.4em;
-  width: 5em;
-  height: 2em;
-  text-align: center;
-  margin: 1em 1em;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  width: 4rem;
+  height: 2rem;
   transition: 0.3s;
+}
+
+@media all and (max-width: 500px) {
+  .btn {
+    margin: 1rem 1rem 1rem 0rem;
+  }
+}
+
+@media all and (min-width: 501px) {
+  .btn {
+    margin: 0rem 1rem 1rem 1rem;
+  }
 }
 
 .btn:active {
@@ -267,8 +315,8 @@ export default {
 }
 
 .btn:hover {
-  border: 0.1em solid #ffcd00;
-  box-shadow: 0em 0em 0.5em #ffcd00;
+  border: 0.1rem solid #ffcd00;
+  box-shadow: 0rem 0rem 0.5rem #ffcd00;
   background-color: #ffcd00;
   color: #fff;
 }

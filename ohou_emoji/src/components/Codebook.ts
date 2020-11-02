@@ -1,14 +1,50 @@
 import CryptoJS from "crypto-js"
 import Graphemer from 'graphemer';
+import CodebookType from "./codebooks/CodebookType";
 import { SmileysCodebook } from "./codebooks/SmileysCodebook"
-// import { HandInHandCodebook } from "./codebooks/HandInHandCodebook"
+import { HandInHandCodebook } from "./codebooks/HandInHandCodebook"
+import { GestureCodebook } from "./codebooks/GestureCodebook"
+import { FlagCodebook } from "./codebooks/FlagCodebook"
+import { FoodCodebook } from "./codebooks/FoodCodebook"
 
 export function Codebook() {
-  // const smileysCodebook = SmileysCodebook()
-  // const handInHandCodebook = HandInHandCodebook()
+  const smileysCodebook = SmileysCodebook()
+  const handInHandCodebook = HandInHandCodebook()
+  const gestureCodebook = GestureCodebook()
+  const glagCodebook = FlagCodebook()
+  const foodCodebook = FoodCodebook()
 
-  var codebook = SmileysCodebook()
+  var codebook = smileysCodebook
   // var codebook = handInHandCodebook
+
+  function changeCodebookType(type:string) {
+    if (type == smileysCodebook.tag) {
+      codebook = smileysCodebook
+    } else if (type == handInHandCodebook.tag) {
+      codebook = handInHandCodebook
+    } else if (type == gestureCodebook.tag) {
+      codebook = gestureCodebook
+    } else if (type == glagCodebook.tag) {
+      codebook = glagCodebook
+    } else if (type == foodCodebook.tag) {
+      codebook = foodCodebook
+    }
+  }
+
+  function spotType(cnt: string): string | null {
+    for (const index in CodebookType) {
+      if (Object.prototype.hasOwnProperty.call(CodebookType, index)) {
+        const element = CodebookType[index];
+        const matchReg = '/' + element + '(\\S*)' + element + '/g'
+        const matchResult = cnt.match(eval(matchReg))
+        if (matchResult != null) {
+          return element
+        }
+      }
+    }
+
+    return null
+  }
 
   const splitter = new Graphemer();
   function encryptTranslate(str: string) {
@@ -31,7 +67,6 @@ export function Codebook() {
 
     for (const ch of splitter.splitGraphemes(str)) {
       let newChar = codebook.decryptCodebook.get(ch)
-
       if (newChar != undefined) {
         newStr += newChar
       }
@@ -41,7 +76,7 @@ export function Codebook() {
   }
 
   const key = CryptoJS.enc.Utf8.parse("ohouohouohouohou") //十六位十六进制数作为密钥
-  const iv = CryptoJS.enc.Utf8.parse("ohou") //十六位十六进制数作为密钥偏移量
+  const iv = CryptoJS.enc.Utf8.parse("ohouohouohouohou") //十六位十六进制数作为密钥偏移量
 
   // 解密方法
   function decrypt(text: string): string {
@@ -75,6 +110,8 @@ export function Codebook() {
 
   return {
     encrypt,
-    decrypt
+    decrypt,
+    changeCodebookType,
+    spotType
   }
 }
