@@ -64,7 +64,12 @@
         ></textarea>
       </div>
     </div>
-    <h6>{{ state.foot }}</h6>
+    <h6 style="margin: 1rem 1rem 0rem 1rem">
+      使用本工具进行非法活动，后果自负!
+    </h6>
+    <h6 style="margin: 1rem 1rem 1rem 1rem">
+      🥳😞😃😂😶😝😡😖😇🤩🥱😕🤡🥱😷😎🤑😝😫😑😚😓🧐😡😲😷🤑🤣😁😊😨🙄😰😛😠🤮🤤😃😆😥🤭😖🤭😷😚☺️😗😈😁😢😶🙃🤗😊🤯😜🤮💩😰🤭😉😲😵😱🥴🥳
+    </h6>
     <TypeSelect
       v-bind:style="{ display: state.selectingType ? 'block' : 'none' }"
       v-bind:type="state.codebooksType"
@@ -103,8 +108,6 @@ export default defineComponent({
       decryptBtnText: btnText.decryptText,
       leftContent: "",
       rightContent: "",
-      foot:
-        "🥳😞😃😂😶😝😡😖😇🤩🥱😕🤡🥱😷😎🤑😝😫😑😚😓🧐😡😲😷🤑🤣😁😊😨🙄😰😛😠🤮🤤😃😆😥🤭😖🤭😷😚☺️😗😈😁😢😶🙃🤗😊🤯😜🤮💩😰🤭😉😲😵😱🥴🥳",
       isSmallDevice: false,
       selectingType: false,
       codebooksType: "🥳",
