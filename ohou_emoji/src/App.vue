@@ -22,5 +22,6 @@ export default class App extends Vue {}
   text-align: center;
   width: 100%;
   height: 100%;
+  cursor: url(./assets/pointer.png),pointer;
 }
 </style>
