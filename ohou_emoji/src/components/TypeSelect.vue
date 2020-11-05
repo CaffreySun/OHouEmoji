@@ -5,7 +5,7 @@
       v-bind:style="{ height: state.height + 'rem' }"
     >
       <div>
-        <div class="type_sel_title">选择加密方式</div>
+        <div class="type_sel_title">选择变身类型</div>
         <div
           v-for="(item, index) in codebooksType"
           :key="item"

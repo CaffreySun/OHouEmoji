@@ -7,7 +7,7 @@
         <textarea
           class="text_input"
           v-model="state.leftContent"
-          placeholder="输入需要加密的内容"
+          placeholder="输入需要变身的内容"
           autofocus="true"
         ></textarea>
       </div>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="btn" role="button" v-on:click="state.selectingType = true">
-          加密方式
+          变身方式
         </div>
       </div>
 
@@ -60,13 +60,14 @@
         <textarea
           class="text_input"
           v-model="state.rightContent"
-          placeholder="输入需要解密的Emoji"
+          placeholder="输入需要恢复的Emoji"
         ></textarea>
       </div>
     </div>
     <div class="foot" style="margin: 0.5rem">
-      ⚠️请注意：本工具的加密密钥公开在代码中，故无法保证您的数据安全，请谨慎使用⚠️<br>
-      ⚠️使用本工具进行非法活动，后果自负⚠️
+      <b>提示：变身后的Emoji可以添加任意字符、文字，而不影响还原</b><br>
+      ⚠️这不是加密工具，故无法保障您的数据安全，请谨慎使用⚠️<br>
+      <b style="color: #f00;">⚠️使用本工具进行非法活动，后果自负⚠️</b>
     </div>
     <TypeSelect
       v-bind:style="{ display: state.selectingType ? 'block' : 'none' }"
@@ -89,15 +90,15 @@ export default defineComponent({
   setup() {
     // 按钮文本
     const btnText = {
-      encryptText: "> 加密 >",
+      encryptText: "> 变身 >",
       encryptHoverText: "> > > >",
-      decryptText: "< 解密 <",
+      decryptText: "< 还原 <",
       decryptHoverText: "< < < <",
     };
     const btnTextSmall = {
-      encryptText: "∨ 加密 ∨",
+      encryptText: "∨ 变身 ∨",
       encryptHoverText: "∨ ∨ ∨ ∨",
-      decryptText: "∧ 解密 ∧",
+      decryptText: "∧ 还原 ∧",
       decryptHoverText: "∧ ∧ ∧ ∧",
     };
 
@@ -323,6 +324,6 @@ export default defineComponent({
 }
 
 .foot {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 </style>
