@@ -81,7 +81,7 @@ export default defineComponent({
 .footer {
   margin: 1rem 0rem 0.5rem 0rem;
   font-size: 0.7rem;
-  width: 30rem;
+  width: 25rem;
   align-self: center;
 }
 

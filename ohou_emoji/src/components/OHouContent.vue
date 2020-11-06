@@ -123,7 +123,7 @@ export default defineComponent({
       state.rightContent = encrypt(state.leftContent);
     }
 
-    window.onresize = () => {
+    function widthChange() {
       if (document.body.clientWidth <= 500) {
         state.isSmallDevice = true;
       } else {
@@ -144,8 +144,13 @@ export default defineComponent({
       state.decryptBtnText = state.isSmallDevice
         ? btnTextSmall.decryptText
         : btnText.decryptText;
+    }
+
+    window.onresize = () => {
+      widthChange();
     };
 
+    widthChange();
     return {
       btnText,
       btnTextSmall,
