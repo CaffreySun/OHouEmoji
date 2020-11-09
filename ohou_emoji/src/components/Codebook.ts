@@ -6,6 +6,7 @@ import { HandInHandCodebook } from "./codebooks/HandInHandCodebook"
 import { GestureCodebook } from "./codebooks/GestureCodebook"
 import { FlagCodebook } from "./codebooks/FlagCodebook"
 import { FoodCodebook } from "./codebooks/FoodCodebook"
+import { PokerCodebook } from "./codebooks/PokerCodebook"
 
 export function Codebook() {
   const smileysCodebook = SmileysCodebook()
@@ -13,9 +14,9 @@ export function Codebook() {
   const gestureCodebook = GestureCodebook()
   const glagCodebook = FlagCodebook()
   const foodCodebook = FoodCodebook()
+  const pokerCodebook = PokerCodebook()
 
   var codebook = smileysCodebook
-  // var codebook = handInHandCodebook
 
   function changeCodebookType(type:string) {
     if (type == smileysCodebook.tag) {
@@ -28,6 +29,8 @@ export function Codebook() {
       codebook = glagCodebook
     } else if (type == foodCodebook.tag) {
       codebook = foodCodebook
+    } else if (type == pokerCodebook.tag) {
+      codebook = pokerCodebook
     }
   }
 

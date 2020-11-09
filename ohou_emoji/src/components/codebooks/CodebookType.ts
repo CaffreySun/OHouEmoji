@@ -1,2 +1,2 @@
-const CodebookType = ["🥳", "👬", "🤝", "🏳️‍🌈", "🍋"];
+const CodebookType = ["🥳", "👬", "🤝", "🏳️‍🌈", "🍋", "🃟"];
 export default CodebookType
