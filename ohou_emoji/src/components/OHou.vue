@@ -7,7 +7,7 @@
 
     <OHouContent
       v-bind:codebooksType="state.codebooksType"
-      v-on:update:Type="state.codebooksType = $event"
+      v-on:update:Type="updateCodebookType($event)"
       v-bind:selectingType="state.selectingType"
       v-on:update:Selecting="state.selectingType = $event"
     />
@@ -45,17 +45,30 @@ export default defineComponent({
       codebooksType: "🥳",
     });
 
+    const localTypeKey = "codebook_type";
+    const localType = localStorage.getItem(localTypeKey);
+
+    if (localType != null) {
+      state.codebooksType = localType;
+    }
+
     function codebooksTypeChanged(type: string) {
       state.selectingType = false;
 
       if (type == null) return;
 
+      updateCodebookType(type);
+    }
+
+    function updateCodebookType(type: string) {
       state.codebooksType = type;
+      localStorage.setItem(localTypeKey, type);
     }
 
     return {
       state,
       codebooksTypeChanged,
+      updateCodebookType,
     };
   },
 });
