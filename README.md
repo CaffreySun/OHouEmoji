@@ -1,15 +1,15 @@
 # 噢吼 Emoji
 
-[噢吼 Emoji](https://caffreysun.github.io/OHouEmoji/) 一个将文本变成Emoji的小工具。
+[噢吼 Emoji](https://emoji.ohou.ga/) 一个将文本变成Emoji的小工具。
 
 目前支持：
 
-- 表情Emoji
-- 手拉手Emoji
-- 手势Emoji
-- 旗帜Emoji
-- 食物Emoji
-- 扑克符号(虽然不是emoji，但也挺有意思的)
+- 🥳表情🥳
+- 👬手拉手👬
+- 🤝手势🤝
+- 🏳️‍🌈旗帜🏳️‍🌈
+- 🍋"食物🍋"
+- 🃟扑克符号🃟 (虽然不是emoji，但也挺有意思的)
 - 【待加入】麻将符号(虽然不是emoji，但也挺有意思的)
 - 【待加入】骨牌符号(虽然不是emoji，但也挺有意思的)
 
