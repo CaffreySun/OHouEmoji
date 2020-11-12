@@ -15,7 +15,6 @@
       <div
         class="btn"
         role="button"
-        title="因为各版本操作系统对 Emoji 支持不一，可能出现Emoji显示不全的问题。"
         v-on:click="encryptText"
         @mouseenter="
           state.encryptBtnText = state.isSmallDevice
@@ -63,7 +62,9 @@
       <textarea
         class="text_input"
         v-model="state.rightContent"
-        placeholder="输入需要恢复的Emoji"
+        placeholder="输入需要还原的Emoji
+
+⚠️注意：因为各版本操作系统对 Emoji 支持不同，可能出现 Emoji 显示不全的问题⚠️"
       ></textarea>
     </div>
   </div>
