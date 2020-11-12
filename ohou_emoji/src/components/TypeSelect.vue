@@ -20,7 +20,7 @@
             type_selected: type == codebooksType[index],
           }"
         >
-          <div>{{ item + codebooksTypeTitle[index] + item }}</div>
+          <div>{{ item + CodebookTypeTitle[index] + item }}</div>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { reactive, defineComponent } from "vue";
-import CodebookType from "./codebooks/CodebookType";
+import { CodebookType, CodebookTypeTitle } from "./codebooks/CodebookType";
 
 export default defineComponent({
   props: {
@@ -39,19 +39,17 @@ export default defineComponent({
   setup() {
     const codebooksType = CodebookType;
 
-    const codebooksTypeTitle = ["表情", "手拉手", "手势", "旗帜", "食物", "扑克", "麻将"];
-
     const itemHeight = 3;
 
     const state = reactive({
       title: "title",
-      height: codebooksTypeTitle.length * itemHeight + 3.5,
+      height: CodebookTypeTitle.length * itemHeight + 3.5,
     });
 
     return {
       state,
       codebooksType,
-      codebooksTypeTitle,
+      CodebookTypeTitle,
       itemHeight,
     };
   },

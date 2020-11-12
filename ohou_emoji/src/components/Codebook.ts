@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js"
 import Graphemer from 'graphemer';
-import CodebookType from "./codebooks/CodebookType";
+import { CodebookType } from "./codebooks/CodebookType";
 import { SmileysCodebook } from "./codebooks/SmileysCodebook"
 import { HandInHandCodebook } from "./codebooks/HandInHandCodebook"
 import { GestureCodebook } from "./codebooks/GestureCodebook"
