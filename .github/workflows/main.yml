@@ -2,7 +2,7 @@ name: DeployGH
 on:
   push:
     branches:
-      - main
+      - stable
 
 jobs:
   main:
