@@ -39,7 +39,7 @@ export default defineComponent({
   setup() {
     const codebooksType = CodebookType;
 
-    const codebooksTypeTitle = ["表情", "手拉手", "手势", "旗帜", "食物", "扑克"];
+    const codebooksTypeTitle = ["表情", "手拉手", "手势", "旗帜", "食物", "扑克", "麻将"];
 
     const itemHeight = 3;
 
