@@ -69,7 +69,7 @@ export default defineComponent({
   position: absolute;
   box-sizing: content-box;
   left: 50%;
-  top: 50%;
+  top: 10%;
   width: 10rem;
   height: 13.5rem;
 }
@@ -77,7 +77,7 @@ export default defineComponent({
 .type_select_cnt > div {
   position: relative;
   left: -50%;
-  top: -50%;
+  top: 0%;
   width: 100%;
   height: 100%;
   background-color: #fff;
