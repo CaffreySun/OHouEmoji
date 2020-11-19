@@ -75,6 +75,7 @@ import { reactive, defineComponent } from "vue";
 // eslint-disable-next-line no-unused-vars
 import { SetupContext, EmitsOptions } from "vue";
 import { Codebook } from "./Codebook";
+import { Statistics } from './Statistics'
 
 export default defineComponent({
   props: {
@@ -106,6 +107,7 @@ export default defineComponent({
     });
 
     const { encrypt, decrypt, changeCodebookType, spotType } = Codebook();
+    const { statistics } = Statistics()
 
     //解密方法
     function decryptText() {
@@ -114,6 +116,7 @@ export default defineComponent({
         changeCodebookType(type);
         ctx.emit("update:Type", type);
       }
+      statistics(1, props.codebooksType)
       state.leftContent = decrypt(state.rightContent);
     }
 
@@ -121,6 +124,7 @@ export default defineComponent({
     function encryptText() {
       if (state.leftContent.length == 0) return;
       changeCodebookType(props.codebooksType);
+      statistics(0, props.codebooksType)
       state.rightContent = encrypt(state.leftContent);
     }
 
