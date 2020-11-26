@@ -1,13 +1,13 @@
 import CryptoJS from "crypto-js"
 import Graphemer from 'graphemer';
-import { CodebookType } from "./codebooks/CodebookType";
-import { SmileysCodebook } from "./codebooks/SmileysCodebook"
-import { HandInHandCodebook } from "./codebooks/HandInHandCodebook"
-import { GestureCodebook } from "./codebooks/GestureCodebook"
-import { FlagCodebook } from "./codebooks/FlagCodebook"
-import { FoodCodebook } from "./codebooks/FoodCodebook"
-import { PokerCodebook } from "./codebooks/PokerCodebook"
-import { MahjongCodebook } from "./codebooks/MahjongCodebook"
+import { CodebookType } from "./CodebookType";
+import { SmileysCodebook } from "./SmileysCodebook"
+import { HandInHandCodebook } from "./HandInHandCodebook"
+import { GestureCodebook } from "./GestureCodebook"
+import { FlagCodebook } from "./FlagCodebook"
+import { FoodCodebook } from "./FoodCodebook"
+import { PokerCodebook } from "./PokerCodebook"
+import { MahjongCodebook } from "./MahjongCodebook"
 
 export function Codebook() {
   const smileysCodebook = SmileysCodebook()

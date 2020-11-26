@@ -74,7 +74,7 @@
 import { reactive, defineComponent } from "vue";
 // eslint-disable-next-line no-unused-vars
 import { SetupContext, EmitsOptions } from "vue";
-import { Codebook } from "./Codebook";
+import { Codebook } from "./codebooks/Codebook";
 import { Statistics } from './Statistics'
 
 export default defineComponent({
