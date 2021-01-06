@@ -5,7 +5,8 @@
       <textarea
         class="text_input"
         v-model="state.leftContent"
-        placeholder="输入需要变身的内容"
+        placeholder=">>输入需要变身的内容<<
+✌️麻将 和 扑克 变身方式，对各个系统兼容性较好✌️"
         autofocus="true"
       ></textarea>
     </div>
@@ -63,8 +64,7 @@
         class="text_input"
         v-model="state.rightContent"
         placeholder=">>输入需要还原的Emoji<<
-⚠️注意：因各系统对 Emoji 支持不同，可能出现 Emoji 显示不全的问题⚠️
-✌️麻将 和 扑克 变身方式兼容性较好✌️"
+⚠️注意：因各系统对 Emoji 支持不同，可能出现 Emoji 显示不全的问题⚠️"
       ></textarea>
     </div>
   </div>
