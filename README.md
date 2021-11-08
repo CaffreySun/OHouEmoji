@@ -1,6 +1,6 @@
 # 噢吼 Emoji
 
-[噢吼 Emoji](https://emoji.ohou.ga/) 一个将文本变成Emoji的小工具。
+[噢吼 Emoji](https://emoji.ohou.fun/) 一个将文本变成Emoji的小工具。
 
 目前支持：
 
